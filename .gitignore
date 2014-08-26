@@ -21,3 +21,6 @@ $RECYCLE.BIN/
 component/bower_components/
 component/node_modules/
 component/build/
+application/bower_components/
+application/node_modules/
+application/build/

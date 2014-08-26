@@ -7,7 +7,7 @@
 declare var $, angular;
 
 module NgTsSeed {
-    var ngModule = angular.module('ad.ui.bookmarks', ['ad.ui.bootstrap', 'ad.ws.repair']);
+    var ngModule = angular.module('NgTsSeed', []);
 
     ngModule.controller('ngTsController', NgTsSeed.Controller);
     NgTsSeed.Directives.Init(ngModule);

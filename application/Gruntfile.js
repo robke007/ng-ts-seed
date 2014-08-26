@@ -6,7 +6,7 @@ module.exports = function(grunt) {
         ts: {
             build: {
                 src: ['src/**/*.ts'],
-                out: 'build/<%= pkg.name %>.js',
+                out: 'build/scripts/<%= pkg.name %>.js',
                 reference: 'src/reference.ts'
             }
         },
@@ -15,7 +15,7 @@ module.exports = function(grunt) {
                 module: '<%= pkg.name %>-templates'
             },
             main: {
-                src: ['src/**/*.html'],
+                src: ['src/*/**/*.html'],
                 dest: 'src/<%= pkg.name %>-templates.ts'
             }
         },
@@ -24,14 +24,14 @@ module.exports = function(grunt) {
                 banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
             },
             build: {
-                src: 'build/<%= pkg.name %>.js',
-                dest: 'build/<%= pkg.name %>.min.js'
+                src: 'build/scripts/<%= pkg.name %>.js',
+                dest: 'build/scripts/<%= pkg.name %>.min.js'
             }
         },
         less: {
             development: {
                 files: {
-                    "build/<%= pkg.name %>.css": "src/**/*.less"
+                    "build/css/<%= pkg.name %>.css": "src/**/*.less"
                 }
             }
         },
@@ -42,6 +42,35 @@ module.exports = function(grunt) {
             generatedFiles: {
                 src: ["src/<%= pkg.name %>.js", "src/<%= pkg.name %>-templates.ts"]
             }
+        },
+        concat: {
+            options: {
+                separator: '\r\n'
+            },
+            libs: {
+                src: [
+                    "bower_components/jquery/dist/jquery.min.js",
+                    "bower_components/angular/angular.min.js",
+                    "bower_components/angular-animate/angular-animate.min.js",
+                    "bower_components/angular-sanitize/angular-sanitize.min.js",
+                    "bower_components/angular-ui-router/release/angular-ui-router.min.js",
+                    "bower_components/angular-bootstrap/ui-bootstrap.min.js"
+                ],
+                dest: 'build/scripts/libs.js'
+            },
+            libStyles:{
+                src:[
+                    "bower_components/bootstrap/dist/css/bootstrap.min.css"
+                ],
+                dest: 'build/css/libStyles.css'
+            }
+        },
+        copy: {
+            assets: {
+                files: [
+                    {expand: true,  cwd: 'src', src: 'index.html', dest: 'build/'}
+                ]
+            }
         }
     });
 
@@ -50,8 +79,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-html2js');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-ts');
 
+
     // Default task(s).
-    grunt.registerTask('build', ['clean:build','less','html2js', 'ts', 'uglify', 'clean:generatedFiles']);
+    grunt.registerTask('build', ['clean:build','concat','less','html2js', 'ts', 'uglify', 'copy:assets','clean:generatedFiles']);
 };

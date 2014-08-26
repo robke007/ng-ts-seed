@@ -7,25 +7,20 @@
 declare var $, angular;
 
 module NgTsSeed {
-    var ngModule = angular.module('ad.ui.bookmarks', ['ad.ui.bootstrap', 'ad.ws.repair']);
+    var ngApp = angular.module('app', ['ui.router','angularTypescriptApplication-templates']);
 
-//    bookmarks.provider('repairGridState', function repairGridStateProvider() {
-//        this.initStates = function ($stateProvider, rootState = '') {
-//            $stateProvider.
-//                state((rootState ? rootState + '.' : '' ) + 'repair-grid', {
-//                    url: '/repair/grid/car/:carId',
-//                    templateUrl: 'partials/repairGrid.html',
-//                    controller: 'repairgridCtrl'
-//                })
-//            ;
-//        };
-//        this.$get = [function () {
-//            return null;
-//        }];
-//    });
+    ngApp.service('ShellService', NgTsSeed.ShellService);
 
-    bookmarks.controller('bookmarksController', AD.UI.Bookmarks.Controller);
-    AD.UI.Bookmarks.Directives.Init(bookmarks);
+    ngApp.config(['$stateProvider', '$urlRouterProvider',
+        function($stateProvider, $urlRouterProvider) {
+            $stateProvider.
+                state(Strings.Routes.home, {url:'/home' ,templateUrl: 'home/partials/home.html'}).
+                state(Strings.Routes.aboutUs, {url:'/aboutUs' ,templateUrl: 'aboutUs/partials/aboutUs.html'})
+            $urlRouterProvider.otherwise("/home");
+        }]);
+
+    ngApp.controller('ShellController', NgTsSeed.ShellController);
+    ShellDirectives.Init(ngApp);
 
 //    bookmarks.controller('repairgridCtrl', Controller);
 }

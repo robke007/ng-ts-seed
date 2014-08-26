@@ -1,0 +1,23 @@
+<div>
+    <div class="navbar navbar-default navbar-fixed-top ng-scope" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" ng-click="vm.ShellService.goToHome()">
+                    NgTsSeed
+                </a>
+            </div>
+            <div class="navbar-collapse collapse" data-collapse="!navbarExpanded">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a ng-click="vm.ShellService.goToHome()">Home</a></li>
+                    <li><a ng-click="vm.ShellService.goToAboutUs()">About Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
