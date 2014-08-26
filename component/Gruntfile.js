@@ -53,5 +53,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-ts');
 
     // Default task(s).
-    grunt.registerTask('build', ['clean:build','less','html2js', 'ts', 'uglify']);
+    grunt.registerTask('build', ['clean:build','less','html2js', 'ts', 'uglify', 'clean:generatedFiles']);
 };

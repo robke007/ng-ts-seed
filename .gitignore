@@ -17,6 +17,7 @@ $RECYCLE.BIN/
 
 # Directories
 .idea
+.tscache
 component/bower_components/
 component/node_modules/
 component/build/
